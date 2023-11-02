@@ -182,7 +182,8 @@
         <script src="{{ asset('assets/js/plugins.init.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
         <!-- JAVASCRIPTS -->
-
+        <!--Tawk.to Script-->
+        <x-tawk-chat />
     </body>
 
 </html>

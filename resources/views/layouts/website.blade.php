@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />
     <!-- Scripts -->
     {{-- 'resources/css/app.css',  --}}
-    @vite(['resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="dark:bg-slate-900">
@@ -67,6 +69,8 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!-- JAVASCRIPTS -->
     @stack('scripts')
+    <!--Tawk.to Script-->
+    <x-tawk-chat />
 </body>
 
 </html>

@@ -19,7 +19,7 @@
                             <div class="subcribe-form z-1">
                                 <form class="relative max-w-lg md:ms-auto">
                                     <input type="email" id="subcribe" name="email"
-                                        class="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700"
+                                        class="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 focus:ring-0 outline-none"
                                         placeholder="Enter your email :">
                                     <button type="submit"
                                         class="btn bg-green-600 hover:bg-green-700 text-white rounded-full">{{ __('Subscribe') }}</button>
@@ -55,7 +55,7 @@
                             <h5 class="tracking-[1px] text-gray-100 font-semibold">{{ config('app.name') }}</h5>
                             <ul class="list-none footer-list mt-6">
                                 <li>
-                                    <a href="{{ route('property.index') }}"
+                                    <a href="{{ route('property_page') }}"
                                         class="text-slate-300 hover:text-slate-400 duration-500 ease-in-out"><i
                                             class="uil uil-angle-right-b me-1"></i> {{ __('Properties') }}</a>
                                 </li>

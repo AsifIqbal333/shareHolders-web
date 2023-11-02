@@ -1,4 +1,4 @@
-<x-website-layout>
+<x-form-layout>
     <style>
 
     </style>
@@ -163,4 +163,4 @@
     </section><!--end section-->
     <!-- End Section-->
 
-</x-website-layout>
+</x-form-layout>

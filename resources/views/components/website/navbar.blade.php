@@ -46,7 +46,7 @@
             <ul class="navigation-menu justify-end nav-light">
                 {{-- <li><a href="{{ route('homepage') }}" class="sub-menu-item">{{ __('Home') }}</a></li> --}}
 
-                <li><a href="{{ route('property.index') }}" class="sub-menu-item">{{ __('Properties') }}</a></li>
+                <li><a href="{{ route('property_page') }}" class="sub-menu-item">{{ __('Properties') }}</a></li>
 
                 <li><a href="{{ route('about') }}" class="sub-menu-item">{{ __('About') }}</a></li>
 

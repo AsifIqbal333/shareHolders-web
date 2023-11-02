@@ -8,6 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -21,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'phone_verified_at'
+        'role_id', 'name', 'phone', 'email', 'password', 'phone_verified_at'
     ];
 
     /**
@@ -58,5 +59,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function kyc(): HasOne
     {
         return $this->hasOne(Kyc::class);
+    }
+
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
     }
 }

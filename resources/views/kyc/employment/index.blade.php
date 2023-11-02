@@ -12,7 +12,8 @@
             <div class="grid grid-cols-1">
                 <div class="mb-4">
                     <label class="font-medium" for="employment_status">{{ __('What is your employment status?') }}</label>
-                    <select name="employment_status" id="employment_status" class="form-input mt-3" required>
+                    <select name="employment_status" id="employment_status" class="form-input form-select mt-3"
+                        required>
                         <option value="">{{ __('Select Option') }}</option>
                         @foreach ($employment_status as $value => $status)
                             <option value="{{ $value }}" @selected(old('employment_status') === $value)>{{ $status }}
@@ -24,7 +25,7 @@
 
                 <div class="mb-4">
                     <label class="font-medium" for="wealth_source">{{ __('Wealth Source') }}</label>
-                    <select name="wealth_source" id="wealth_source" class="form-input mt-3" required>
+                    <select name="wealth_source" id="wealth_source" class="form-input form-select mt-3" required>
                         <option value="">{{ __('Select Option') }}</option>
                         @foreach ($wealth_source as $value => $source)
                             <option value="{{ $value }}" @selected(old('wealth_source') === $value)> {{ $source }}

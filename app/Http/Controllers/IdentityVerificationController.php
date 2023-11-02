@@ -26,7 +26,7 @@ class IdentityVerificationController extends Controller
     public function store(PassportRequest $request)
     {
         $data = $request->validated();
-        $data['passport'] = $this->fileUpload($request->passport_image, 'kyc');
+        $data['passport_image'] = $this->fileUpload($request->passport_image, 'kyc');
 
         $request->user()->kyc()->create($data);
 

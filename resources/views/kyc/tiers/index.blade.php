@@ -113,6 +113,8 @@
         <script src="{{ asset('assets/js/app.js') }}"></script>
         <!-- JAVASCRIPTS -->
 
+        <!--Tawk.to Script-->
+        <x-tawk-chat />
     </body>
 
 </html>

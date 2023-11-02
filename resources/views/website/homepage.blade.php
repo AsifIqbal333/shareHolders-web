@@ -12,7 +12,7 @@
         <x-website.homepage.works />
 
         <!-- Properties -->
-        <x-website.properties />
+        <x-website.properties :properties="$properties" />
     </section>
     <!--end section-->
 

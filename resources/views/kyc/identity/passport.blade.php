@@ -49,7 +49,6 @@
                                 <form class="ltr:text-left rtl:text-right" method="POST"
                                     action="{{ route('identity.store') }}" enctype="multipart/form-data">
                                     @csrf
-                                    {{ $errors }}
                                     <div class="grid grid-cols-1">
                                         <div class="mb-4">
                                             <label class="font-medium"
