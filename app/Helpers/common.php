@@ -2,6 +2,7 @@
 
 use App\Enums\PropertyStatus;
 use App\Models\Amenity;
+use App\Models\Investment;
 use App\Models\Property;
 
 if (!function_exists('name_alphabetic')) {
@@ -95,5 +96,12 @@ if (!function_exists('funded')) {
     function funded($invest, $price)
     {
         return ceil(($invest / $price) * 100);
+    }
+}
+
+if (!function_exists('is_invested')) {
+    function is_invested($property_id)
+    {
+        return Investment::where('property_id', $property_id)->where('user_id', auth()->id())->exists();
     }
 }

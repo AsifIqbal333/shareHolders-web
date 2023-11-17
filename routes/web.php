@@ -74,6 +74,7 @@ Route::middleware(['auth', 'verified', 'phone_verified', 'has_tier', 'has_fill_i
     Route::get('wallet/deposit/cancel', [WalletController::class, 'deposit_cancel'])->name('wallet.deposit.cancel');
     Route::get('stripe/onboarding', [WalletController::class, 'onboarding'])->name('stripe.onboarding');
     Route::get('stripe/onboarding/success/{account_id}', [WalletController::class, 'onboarding_success'])->name('stripe.onboarding.success');
+    Route::post('wallet/withdraw', [WalletController::class, 'withdraw'])->name('wallet.withdraw');
 
     // bookmarks
     Route::get('bookmarks', BookmarkController::class)->name('bookmarks.index');

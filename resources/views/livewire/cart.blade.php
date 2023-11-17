@@ -90,11 +90,15 @@
                                         wire:click="changeInvestment('{{ $item->id }}',1000)">+</button>
                                 </div>
 
+                                @php
+                                    $funded = funded($item->property->investments->sum('amount'), $item->property->price);
+                                @endphp
                                 <div class="flex flex-col w-full mt-5">
                                     <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700 mb-1">
-                                        <div class="bg-green-600 h-2 rounded-full" style="width: 45%"></div>
+                                        <div class="bg-green-600 h-2 rounded-full" style="width: {{ $funded }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm">0% {{ __('funded') }}</span>
+                                    <span class="text-sm">{{ $funded }}% {{ __('funded') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -111,22 +115,23 @@
                     </div>
                 @endforeach
             </div>
+            @php
+                $total = $carts->sum('amount');
+            @endphp
             <div
                 class="group rounded-lg bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 h-full w-full lg:w-[35%] p-5 pb-8 sticky top-16">
                 <div class="flex justify-between items-center font-semibold text-xl">
                     <h2>{{ __('Total') }}</h2>
-                    <h2>${{ currency_format($carts->sum('amount')) }}</h2>
+                    <h2>${{ currency_format($total) }}</h2>
                 </div>
 
                 {{-- checkout types --}}
                 <div class="flex flex-col mt-4">
                     @foreach ($types as $value => $type)
                         @php
-                            if ($value === 'wallet' && $wallet->cash_balance < 1) {
+                            if ($value === 'wallet' && $wallet->cash_balance < $total) {
                                 $is_disable = true;
-                            } elseif ($value === 'reward' && $wallet->reward_balance < 1) {
-                                $is_disable = true;
-                            } elseif ($value === 'combine' && $wallet->cash_balance < 1 && $wallet->reward_balance < 1) {
+                            } elseif ($value === 'reward' && $wallet->reward_balance < $total) {
                                 $is_disable = true;
                             } else {
                                 $is_disable = false;

@@ -405,7 +405,9 @@
 
                                 <div class="flex justify-between mb-3">
                                     <p>
-                                        <span class="text-green-500 text-lg">{{ $property->investors }}
+                                        {{-- $property->investors --}}
+                                        <span
+                                            class="text-green-500 text-lg">{{ $property->investments?->unique('user_id')?->count() }}
                                         </span>{{ __('investors') }}
                                     </p>
                                     {{-- @if (now()->diffInDays($property->closing_date) < 50) --}}

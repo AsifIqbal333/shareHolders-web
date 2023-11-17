@@ -13,13 +13,12 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
-        $property->load(['images', 'city:id,name', 'country:id,name,code', 'category:id,name', 'documents']);
+        $property->load(['images', 'city:id,name', 'country:id,name,code', 'category:id,name', 'documents', 'investments:id,user_id,property_id']);
         $property->loadSum('investments', 'amount');
-        $property->loadCount(['videos', 'investments as investors']);
+        $property->loadCount(['videos']);
+        // , 'investments as investors'
 
-        $data = [];
-
-        return view('properties.show', compact('property', 'data'));
+        return view('properties.show', compact('property'));
     }
 
     public function files(Property $property)

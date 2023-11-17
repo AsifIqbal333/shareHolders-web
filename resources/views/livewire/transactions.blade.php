@@ -6,6 +6,9 @@
                     {{ __('Type') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    {{ __('Gateway') }}
+                </th>
+                <th scope="col" class="px-6 py-3">
                     {{ __('Date') }}
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -26,8 +29,11 @@
                     <td class="px-6 py-4 capitalize">
                         {{ $transaction->type }}
                     </td>
+                    <td class="px-6 py-4 capitalize">
+                        {{ $transaction->gateway === 'stripe' ? 'card' : $transaction->gateway }}
+                    </td>
                     <td class="px-6 py-4">
-                        {{ $transaction->created_at->toFormattedDateString() }}
+                        {{ $transaction->created_at->format('M, d Y h:i:s A') }}
                     </td>
                     <td class="px-6 py-4">
                         ${{ currency_format($transaction->amount) }}

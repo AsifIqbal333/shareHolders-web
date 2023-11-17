@@ -15,7 +15,7 @@ class Wallet extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'cash_balance', 'reward_balance', 'status', 'stripe_account_id', 'completed_stripe_onboarding'];
+    protected $fillable = ['user_id', 'cash_balance', 'reward_balance', 'status', 'stripe_customer_id', 'stripe_account_id', 'completed_stripe_onboarding'];
 
     /**
      * The attributes that should be cast to native types.
