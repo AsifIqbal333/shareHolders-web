@@ -32,6 +32,7 @@ export default {
         },
         fontFamily: {
             body: ['"League Spartan", sans-serif'],
+            poppins: ["Poppins"],
         },
 
         extend: {

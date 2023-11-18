@@ -12,17 +12,17 @@
         </datalist>
     </div>
 
-    <input type="hidden" name="tier_id" value={{ $tier['id'] }}>
+    <input type="hidden" name="tier_id" value={{ $tier->id }}>
 
     {{-- show tiers here --}}
     {{-- style="background: lightgray;" --}}
     <div class="text-center mt-5 border rounded-md p-5">
         <div class="mx-auto" style="width: 80%;">
-            <h3 class="font-semibold text-lg uppercase">{{ $tier['name'] }}</h3>
+            <h3 class="font-semibold text-lg uppercase">{{ $tier->name }}</h3>
             <p class="mt-3">{{ __('Invest From') }}</p>
-            <h2 class="font-bold text-2xl mt-2 mb-4">${{ $tier['start'] }}</h2>
+            <h2 class="font-bold text-2xl mt-2 mb-4">${{ $tier->starting }}</h2>
             <ul class="text-left">
-                @foreach ($tier['specifications'] as $item)
+                @foreach ($tier->specifications as $item)
                     <li class="flex">
                         <svg class="flex-shrink-0 h-6 w-6 text-blue-600" width="16" height="16"
                             viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

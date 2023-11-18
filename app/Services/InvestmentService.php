@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\TransactionGateway;
 use App\Enums\TransactionTypes;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 
@@ -44,6 +47,36 @@ class InvestmentService
         return true;
     }
 
+    public function referral_reward()
+    {
+        // user is referrer and referral user has not been awarded yet and user investmet is greater then required
+        if (request()->user()->referral && !request()->user()->referral?->is_rewarded && request()->user()->investments()->sum('amount') >= investment_for_reward()) {
+
+            $referral_user = User::with(['wallet', 'user_info.tier'])->find(request()->user()->referral->referral_user);
+            $referral_user_wallet = $referral_user->wallet;
+            $referral_reward = $referral_user->user_info?->tier->referral_reward;
+
+            Transaction::create([
+                'user_id' => $referral_user->id,
+                'type' => TransactionTypes::Deposit->value,
+                'amount' => $referral_reward,
+                'gateway' => TransactionGateway::ReferralReward->value,
+                'wallet_cash_balance' => $referral_user_wallet->cash_balance,
+                'wallet_reward_balance' => $referral_user_wallet->reward_balance + $referral_reward,
+            ]);
+
+            $referral_user_wallet->update([
+                'reward_balance' => $referral_user_wallet->reward_balance + $referral_reward
+            ]);
+
+            request()->user()->referral()->update([
+                'is_rewarded' => true,
+            ]);
+        }
+
+        return true;
+    }
+
     public function wallet_investment($total)
     {
         $wallet =  request()->user()->wallet;
@@ -51,7 +84,7 @@ class InvestmentService
         $remaining_balance = request()->user()->wallet->cash_balance - $total;
 
         // creating uer transaction
-        $transaction = $this->transaction($total, TransactionTypes::Invest->value, 'wallet', null, $remaining_balance, $wallet->reward_balance);
+        $transaction = $this->transaction($total, TransactionTypes::Invest->value, TransactionGateway::Wallet->value, null, $remaining_balance, $wallet->reward_balance);
 
         // creating user investment
         $this->invest($transaction->id);
@@ -71,7 +104,7 @@ class InvestmentService
         $remaining_balance = request()->user()->wallet->reward_balance - $total;
 
         // creating user transaction
-        $transaction = $this->transaction($total, TransactionTypes::Invest->value, 'reward', null, $wallet->cash_balance, $remaining_balance);
+        $transaction = $this->transaction($total, TransactionTypes::Invest->value, TransactionGateway::Reward->value, null, $wallet->cash_balance, $remaining_balance);
 
         // creating user investment
         $this->invest($transaction->id);
@@ -111,6 +144,7 @@ class InvestmentService
         Stripe::setApiKey(config('services.stripe.secret'));
         $session = \Stripe\Checkout\Session::create([
             'line_items' => $line_items,
+            'customer' => request()->user()->wallet->stripe_customer_id,
             'mode' => 'payment',
             'success_url' => url('/user/checkout/success?session_id={CHECKOUT_SESSION_ID}'),
             'cancel_url' => url('/user/checkout/cancel'),
@@ -133,6 +167,7 @@ class InvestmentService
                 ],
                 'quantity' => 1,
             ]],
+            'customer' => request()->user()->wallet->stripe_customer_id,
             'mode' => 'payment',
             'success_url' => url('/user/checkout/success?session_id={CHECKOUT_SESSION_ID}&reward_trasaction=' . $reward_trasaction_id . '&wallet_trasaction=' . $wallet_trasaction_id),
             'cancel_url' => url('/user/checkout/cancel?reward_trasaction=' . $reward_trasaction_id . '&wallet_trasaction=' . $wallet_trasaction_id),

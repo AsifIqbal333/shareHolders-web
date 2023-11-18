@@ -225,7 +225,7 @@
                                         <i class="far fa-question-circle"></i>
                                     </span>
                                     <div id="tooltip-default" role="tooltip"
-                                        class="absolute z-10 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
+                                        class="absolute z-999 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
                                         {{ __('This rental income breakdown is based on estimated rental income, deductions, and fees for the first year of ownership only. Please note that actual rental income, deductions, and fees may vary based on market conditions and future rental term.') }}
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>

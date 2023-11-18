@@ -91,7 +91,7 @@
 
                                         <div class="mb-4">
                                             <label class="font-medium"
-                                                for="issue_country">{{ __('Write down your password issuing issue_country') }}</label>
+                                                for="issue_country">{{ __('Write down your password issuing country') }}</label>
                                             <input id="issue_country" type="issue_country" name="issue_country"
                                                 value="{{ old('issue_country') }}" class="form-input mt-3"
                                                 placeholder="{{ __('Issue Country') }}" required>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </section>
-            <div class="fixed bottom-3 end-3 z-10">
+            <div class="fixed bottom-3 end-3 z-999">
                 <a href="{{ route('homepage') }}"
                     class="back-button btn btn-icon bg-green-600 hover:bg-green-700 text-white rounded-full"
                     title="{{ __('Homepage') }}"><i data-feather="arrow-left" class="h-4 w-4"></i></a>
@@ -163,7 +163,7 @@
 
         <!-- Back to top -->
         {{-- <a href="#" onclick="topFunction()" id="back-to-top"
-            class="back-to-top fixed hidden text-lg rounded-full z-10 bottom-5 end-5 h-9 w-9 text-center bg-green-600 text-white justify-center items-center"><i
+            class="back-to-top fixed hidden text-lg rounded-full z-999 bottom-5 end-5 h-9 w-9 text-center bg-green-600 text-white justify-center items-center"><i
                 class="uil uil-arrow-up"></i></a> --}}
         <!-- Back to top -->
 

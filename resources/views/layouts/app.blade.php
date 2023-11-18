@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="antialiased font-poppins">
     <div class="min-h-screen bg-gray-100">
         {{-- navbar --}}
         @include('layouts.navigation')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TransactionGateway;
 use App\Enums\TransactionTypes;
 use App\Models\Transaction;
 use App\Services\InvestmentService;
@@ -32,10 +33,13 @@ class CheckoutController extends Controller
         if ($session && $session->status === 'complete') {
             $wallet =  request()->user()->wallet;
             // creating uer transacton
-            $transaction = $service->transaction($session->amount_total / 100, TransactionTypes::Invest->value, 'stripe', $session->id, $wallet->cash_balance, $wallet->reward_balance);
+            $transaction = $service->transaction($session->amount_total / 100, TransactionTypes::Invest->value, TransactionGateway::Stripe->value, $session->id, $wallet->cash_balance, $wallet->reward_balance);
 
             // creating user investment
             $service->invest($transaction->id);
+
+            // check if referral user has to reward based on invesrtment
+            $service->referral_reward();
 
             return to_route('dashboard');
         } else {

@@ -15,7 +15,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'type', 'amount', 'session_id', 'gateway', 'wallet_cash_balance', 'wallet_reward_balance'];
+    protected $fillable = ['user_id', 'type', 'amount', 'session_id', 'gateway', 'wallet_cash_balance', 'wallet_reward_balance', 'stripe_payment_intent', 'stripe_charge_id'];
 
     /**
      * The attributes that should be cast to native types.

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\TransactionGateway;
 use App\Enums\TransactionTypes;
 use App\Models\Cart as ModelsCart;
 use App\Models\Wallet;
@@ -86,7 +87,7 @@ class Cart extends Component
 
                 // if investment total is greater than reward balance
                 if ($total > $wallet->reward_balance) {
-                    $reward_trasaction = $service->transaction($wallet->reward_balance, TransactionTypes::Invest->value, 'reward', null, $wallet->cash_balance, 0);
+                    $reward_trasaction = $service->transaction($wallet->reward_balance, TransactionTypes::Invest->value, TransactionGateway::Reward->value, null, $wallet->cash_balance, 0);
 
                     // update user wallet reward balance
                     request()->user()->wallet()->update([
@@ -95,7 +96,7 @@ class Cart extends Component
                 } else {
                     $remaining_balance = $wallet->reward_balance - $total;
                     // investment total is lower than reward balance
-                    $transaction = $service->transaction($total, TransactionTypes::Invest->value, 'reward', null, $wallet->cash_balance, $remaining_balance);
+                    $transaction = $service->transaction($total, TransactionTypes::Invest->value, TransactionGateway::Reward->value, null, $wallet->cash_balance, $remaining_balance);
                     // invest to property
                     $service->invest($transaction->id);
 
@@ -139,7 +140,7 @@ class Cart extends Component
     {
         // if investment total is greater than wallet cash balance
         if ($total > $wallet->cash_balance) {
-            $wallet_trasaction = $service->transaction($wallet->cash_balance, TransactionTypes::Invest->value, 'wallet', null, 0, 0);
+            $wallet_trasaction = $service->transaction($wallet->cash_balance, TransactionTypes::Invest->value, TransactionGateway::Wallet->value, null, 0, 0);
 
             // update user wallet reward balance
             request()->user()->wallet()->update([
@@ -149,7 +150,7 @@ class Cart extends Component
             // investment total is less than wallet balance
 
             $remaining_balance = $wallet->cash_balance - $total;
-            $transaction = $service->transaction($total, TransactionTypes::Invest->value, 'wallet', null, $remaining_balance, 0);
+            $transaction = $service->transaction($total, TransactionTypes::Invest->value, TransactionGateway::Wallet->value, null, $remaining_balance, 0);
 
             // invest to property
             $service->invest($transaction->id);

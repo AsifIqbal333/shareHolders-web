@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tier;
 use App\Models\UserInfo;
 use App\Services\TierService;
 use Illuminate\Contracts\View\View;
@@ -12,7 +13,7 @@ class TierController extends Controller
     public function index(): View
     {
         return view('kyc.tiers.index', [
-            'tiers' => (new TierService())->get_tiers(),
+            'tiers' => Tier::get(),
         ]);
     }
 

@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'role_id', 'name', 'phone', 'email', 'password', 'phone_verified_at'
+        'role_id', 'name', 'phone', 'email', 'password', 'phone_verified_at', 'referral_code'
     ];
 
     /**
@@ -94,5 +94,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function feedback(): HasOne
     {
         return $this->hasOne(Feedback::class);
+    }
+
+    public function referral(): HasOne
+    {
+        return $this->hasOne(ReferralUser::class);
+    }
+    public function referral_users(): HasMany
+    {
+        return $this->hasMany(ReferralUser::class, 'referral_user');
     }
 }

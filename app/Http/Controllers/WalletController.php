@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TransactionGateway;
 use App\Enums\TransactionTypes;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -18,6 +19,7 @@ class WalletController extends Controller
 
     public function index(): View
     {
+        // dd($this->stripe->checkout->sessions->retrieve('cs_test_a1cS1qyehKooaidHHitWMaqQU3dkitCIDBw7pmgfAkrmaj64MpsZAvp9SK'));
         // dd($this->stripe->balance->retrieve([]));
         return view('wallet');
     }
@@ -54,6 +56,10 @@ class WalletController extends Controller
     public function deposit_success(Request $request)
     {
         $session = $this->stripe->checkout->sessions->retrieve($request->session_id);
+        $payment_intent = $this->stripe->paymentIntents->retrieve(
+            $session->payment_intent,
+            []
+        );
 
         // check if session is complete
         if ($session->status === 'complete') {
@@ -69,8 +75,10 @@ class WalletController extends Controller
             $request->user()->transactions()->create([
                 'type' => TransactionTypes::Deposit->value,
                 'session_id' => $session->id,
+                'stripe_payment_intent' => $session->payment_intent,
+                'stripe_charge_id' => $payment_intent->latest_charge,
                 'amount' => $amount_paid,
-                'gateway' => 'stripe',
+                'gateway' => TransactionGateway::Stripe->value,
                 'wallet_cash_balance' => $new_balance
             ]);
 
@@ -184,7 +192,7 @@ class WalletController extends Controller
             'type' => TransactionTypes::Withdraw->value,
             'session_id' => null,
             'amount' => $request->amount,
-            'gateway' => 'bank',
+            'gateway' => TransactionGateway::Bank->value,
             'wallet_cash_balance' => $new_balance
         ]);
 

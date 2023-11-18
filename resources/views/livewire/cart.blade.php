@@ -31,7 +31,7 @@
                                                     <i class="far fa-question-circle" style="font-size: 13px;"></i>
                                                 </span>
                                                 <div id="monthly_rent" role="tooltip"
-                                                    class="absolute z-10 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
+                                                    class="absolute z-999 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
                                                     {{ __('Monthly rent is a projected average and can vary depending on maintenance requirements and occupancy status') }}
                                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                                 </div>
@@ -49,7 +49,7 @@
                                                     <i class="far fa-question-circle" style="font-size: 13px;"></i>
                                                 </span>
                                                 <div id="appreciation" role="tooltip"
-                                                    class="absolute z-10 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
+                                                    class="absolute z-999 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
                                                     {{ __('Capital appreciation projections are based on a 5 year holding period') }}
                                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                                 </div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <button type="button"
-                            class="mt-4 inline-flex items-center px-3 py-1 text-lg font-medium text-red-900 bg-transparent border border-red-900 rounded-lg hover:bg-red-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700"
+                            class="mt-4 inline-flex items-center px-3 py-1 text-lg font-medium text-red-900 bg-transparent border border-red-900 rounded-lg hover:bg-red-900 hover:text-white focus:z-999 focus:ring-2 focus:ring-red-500 focus:bg-red-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-red-700 dark:focus:bg-red-700"
                             wire:click="deleteItem('{{ $item->id }}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash3 w-3.5 h-3.5 mr-2" viewBox="0 0 16 16">
@@ -153,7 +153,7 @@
                 </div>
 
                 <button type="button"
-                    class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mt-7 w-full disabled:opacity-60 disabled:cursor-not-allowed"
+                    class="text-sm text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mt-7 w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     wire:click="checkout" wire:target="checkout" wire:loading.attr="disabled"
                     {{ !$charge_type ? 'disabled' : '' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -11,7 +11,7 @@ class Tier extends Component
     public function mount($tiers)
     {
         $this->tiers = $tiers;
-        $this->tier = $this->tiers[0];
+        $this->tier = $this->tiers->first();
     }
 
     public function render()
@@ -21,10 +21,6 @@ class Tier extends Component
 
     public function updatedValue()
     {
-        if ((int)$this->value >= 25000) {
-            $this->tier = $this->tiers[1];
-        } else {
-            $this->tier = $this->tiers[0];
-        }
+        $this->tier = $this->tiers->where('starting', '<=', (int)$this->value)->last();
     }
 }

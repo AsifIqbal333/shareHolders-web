@@ -5,9 +5,11 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\IdentityVerificationController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController as AuthPropertyController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\RewardController;
 use App\Http\Controllers\TierController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\WalletController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\Website\AboutController;
 use App\Http\Controllers\Website\ContactController;
 use App\Http\Controllers\Website\HomepageController;
 use App\Http\Controllers\Website\PropertyController;
+use App\Http\Controllers\Website\RewardController as WebsiteRewardController;
 use App\Http\Controllers\Website\SellController;
 use App\Http\Controllers\Website\TermsController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +45,7 @@ Route::get('terms-and-conditions', [TermsController::class, 'terms'])->name('ter
 Route::get('privacy-policy', [TermsController::class, 'privacy'])->name('privacy_policy');
 Route::get('cookies-notice', [TermsController::class, 'cookies'])->name('cookies_policy');
 Route::get('key-risks', [TermsController::class, 'risks'])->name('key_risks');
+Route::get('rewards', WebsiteRewardController::class);
 
 // Routes for kyc
 Route::middleware(['auth', 'verified', 'phone_verified'])->prefix('kyc')->group(function () {
@@ -78,6 +82,14 @@ Route::middleware(['auth', 'verified', 'phone_verified', 'has_tier', 'has_fill_i
 
     // bookmarks
     Route::get('bookmarks', BookmarkController::class)->name('bookmarks.index');
+
+    // reward
+    Route::get('portfolio', PortfolioController::class)->name('portfolio.index');
+
+    // reward
+    Route::get('rewards', [RewardController::class, 'index'])->name('rewards.index');
+    Route::get('rewards/tiers', [RewardController::class, 'tiers'])->name('rewards.tiers');
+    Route::get('rewards/referrals', [RewardController::class, 'referrals'])->name('rewards.referrals');
 
     // checkouts route
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');

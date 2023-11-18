@@ -52,7 +52,7 @@
                                 <i class="far fa-question-circle text-sm text-gray-400"></i>
                             </span>
                             <div id="tooltip-default" role="tooltip"
-                                class="absolute z-10 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
+                                class="absolute z-999 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
                                 {{ __('This number shows your current rewards balance. It includes all cashback rewards earned from purchases, referral bonuses, and any other promotional rewards that have not been redeemed yet. This balance can be used to invest in new properties but cannot be withdrawn as cash.') }}
                                 <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
@@ -124,7 +124,7 @@
                                     class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
                                     placeholder=" " required />
                                 <label for="amount"
-                                    class="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('Enter deposit amount') }}</label>
+                                    class="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-999 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('Enter deposit amount') }}</label>
                             </div>
                             <button type="submit"
                                 class="btn bg-green-600 hover:bg-green-700 text-white rounded-md mt-3">{{ __('Deposit') }}</button>
@@ -165,7 +165,7 @@
                                     class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
                                     placeholder=" " min="1" max="{{ $wallet->cash_balance }}" required />
                                 <label for="amount"
-                                    class="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('Enter withdraw amount') }}</label>
+                                    class="peer-focus:font-medium absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-999 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('Enter withdraw amount') }}</label>
                             </div>
                             <button type="submit"
                                 class="btn bg-green-600 hover:bg-green-700 text-white rounded-md mt-3">{{ __('Withdraw') }}</button>

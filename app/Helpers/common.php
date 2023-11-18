@@ -4,6 +4,9 @@ use App\Enums\PropertyStatus;
 use App\Models\Amenity;
 use App\Models\Investment;
 use App\Models\Property;
+use App\Models\Tier;
+use App\Models\User;
+use Carbon\Carbon;
 
 if (!function_exists('name_alphabetic')) {
     function name_alphabetic($name)
@@ -103,5 +106,79 @@ if (!function_exists('is_invested')) {
     function is_invested($property_id)
     {
         return Investment::where('property_id', $property_id)->where('user_id', auth()->id())->exists();
+    }
+}
+
+if (!function_exists('initials')) {
+    function initials($str)
+    {
+        $ret = '';
+        foreach (explode(' ', $str) as $word)
+            $ret .= strtoupper($word[0]);
+        return $ret;
+    }
+}
+
+if (!function_exists('referral_code')) {
+    function referral_code()
+    {
+        if (!auth()->user()->referral_code) {
+            $is_unique = false;
+            do {
+                $code = strtolower(str_replace(' ', '', auth()->user()->name)) . random_int(0, 999);
+                if (!User::where('referral_code', $code)->exists()) {
+                    request()->user()->update([
+                        'referral_code' => $code
+                    ]);
+                    $is_unique = true;
+                }
+            } while (!$is_unique);
+        }
+
+        return auth()->user()->referral_code;
+    }
+}
+
+if (!function_exists('referral_link')) {
+    function referral_link()
+    {
+        return url('/rewards?ref=' . referral_code());
+    }
+}
+
+if (!function_exists('user_next_tier')) {
+    function user_next_tier()
+    {
+        $current_tier = request()->user()->user_info->tier;
+        return Tier::where('starting', '>', $current_tier->starting)->first();
+    }
+}
+
+if (!function_exists('user_yearly_investment')) {
+    function user_yearly_investment()
+    {
+        return request()->user()->investments()->whereBetween(
+            'created_at',
+            [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()]
+        )->sum('amount');
+    }
+}
+
+if (!function_exists('referal_reward')) {
+    function referal_reward()
+    {
+        return 50;
+    }
+}
+if (!function_exists('investment_for_reward')) {
+    function investment_for_reward()
+    {
+        return 2000;
+    }
+}
+
+if (!function_exists('referal_user_reward_after_investment')) {
+    function referal_user_reward_after_investment()
+    {
     }
 }

@@ -73,7 +73,7 @@
             <i class="far fa-question-circle"></i>
         </span>
         <div id="tooltip-default" role="tooltip"
-            class="absolute z-10 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
+            class="absolute z-999 invisible inline-block w-80 px-3 py-2 text-md font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700 text-center">
             {{ __('Default slider values for Projected property value growth and Expected annual rental yield are set to the actual property numbers. d annual rental yield are set to the actual property numbers. You can reset the sliders to see your returns based on the property net yield.') }}
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
